@@ -1,6 +1,6 @@
 import daisyui from "daisyui";
 
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 export default {
   content: [
     "./index.html",
@@ -12,4 +12,24 @@ export default {
   },
 
   plugins: [daisyui],
+
+  daisyui: {
+    themes: [
+      "light",
+      "dark",
+      "night",
+      "cupcake",
+      "bumblebee",
+      "emerald",
+      "corporate",
+      "synthwave",
+      "retro",
+      "cyberpunk",
+      "valentine",
+      "forest",
+      "aqua",
+      "luxury",
+      "dracula",
+    ],
+  },
 };

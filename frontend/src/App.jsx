@@ -3,11 +3,13 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
-import Navbar from "./components/Navbar.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import SettingsPage from "./pages/SettingsPage.jsx";
+
+import Navbar from "./components/Navbar.jsx";
 import { useAuthStore } from "./store/useAuthStore.js";
 
 function App() {
@@ -36,22 +38,67 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={authUser ? <HomePage /> : <Navigate to="/login" />}
+          element={
+            authUser ? (
+              <HomePage />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
         />
 
         <Route
           path="/login"
-          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
+          element={
+            !authUser ? (
+              <LoginPage />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
         />
 
         <Route
           path="/signup"
-          element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
+          element={
+            !authUser ? (
+              <SignUpPage />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
         />
 
         <Route
           path="/profile"
-          element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
+          element={
+            authUser ? (
+              <ProfilePage />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        <Route
+          path="/settings"
+          element={
+            authUser ? (
+              <SettingsPage />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
+
+        <Route
+          path="*"
+          element={
+            <Navigate
+              to={authUser ? "/" : "/login"}
+              replace
+            />
+          }
         />
       </Routes>
 
