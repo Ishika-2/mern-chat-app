@@ -9,6 +9,7 @@ export const useAuthStore = create((set) => ({
   isCheckingAuth: true,
   isSigningUp: false,
   isLoggingIn: false,
+  isUpdatingProfile: false,
 
   checkAuth: async () => {
     try {
@@ -91,6 +92,33 @@ export const useAuthStore = create((set) => ({
       toast.error(
         error.response?.data?.message || "Unable to log out"
       );
+    }
+  },
+
+  updateProfile: async (profileData) => {
+    set({
+      isUpdatingProfile: true,
+    });
+
+    try {
+      const response = await axiosInstance.patch(
+        "/auth/update-profile",
+        profileData
+      );
+
+      set({
+        authUser: response.data,
+      });
+
+      toast.success("Profile picture updated");
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Unable to update profile"
+      );
+    } finally {
+      set({
+        isUpdatingProfile: false,
+      });
     }
   },
 }));
