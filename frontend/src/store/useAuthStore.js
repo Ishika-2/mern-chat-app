@@ -4,7 +4,11 @@ import { io } from "socket.io-client";
 
 import { axiosInstance } from "../lib/axios.js";
 
-const SOCKET_URL = "http://localhost:5000";
+const SOCKET_URL =
+  import.meta.env.VITE_SOCKET_URL ||
+  (import.meta.env.DEV
+    ? "http://localhost:5000"
+    : window.location.origin);
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
